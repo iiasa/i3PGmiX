@@ -35,6 +35,6 @@ library(i3PGmiX)
 For the installation, users are required to install directly from the GitHub repository using the R package devtools. The following commands can be used to install the model in R:
 ```r
 if(!require(devtools)){install.packages(devtools)}
-devtools::install_github( "andreyaugustynczik/i3PGmiX", build_vignettes = TRUE )
+devtools::install_github( "iiasa/i3PGmiX", build_vignettes = TRUE )
 library(i3PGmiX)
 ```
