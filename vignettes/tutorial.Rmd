@@ -1,0 +1,90 @@
+---
+title: "tutorial"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{tutorial}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+
+## Load the package
+
+```{r}
+library(i3PGmiX)
+library(tidyverse)
+```
+
+## Run the model using the default 
+
+```{r}
+    out <- run_3PG(
+      site = d_site,
+      species = d_species,
+      climate = d_climate,
+      thinning = d_thinning,
+      parameters = d_parameters,
+      size_dist = d_sizeDist,
+      settings = list(light_model = 2,
+                      transp_model = 1, 
+                      phys_model = 1,
+                      soil_model=2,
+                      method_jmaxlim=3,
+                      nut_lim=0,
+                      wind_dist=0, 
+                      beetle_dist=0,
+                      dist_start=0,
+                      correct_bias = 0,
+                      calculate_d13c = 0,
+                      canopy_cond=1,
+                      gpp_model=1, 
+                      maint_resp=1),
+      check_input = TRUE,
+      df_out = TRUE)
+```
+
+## Plot the plot standing volume
+
+```{r}
+ggplot(out %>% filter(variable=="volume"),aes(x=date,y=value,col=species)) + geom_line() + theme_light()
+```
+
+## Use the P-model GPP and separation of maintenance/growth respiration
+```{r}
+    out <- run_3PG(
+      site = d_site,
+      species = d_species,
+      climate = d_climate,
+      thinning = d_thinning,
+      parameters = d_parameters,
+      size_dist = d_sizeDist,
+      settings = list(light_model = 2,
+                      transp_model = 1, 
+                      phys_model = 1,
+                      soil_model=2,
+                      method_jmaxlim=3,
+                      nut_lim=0,
+                      wind_dist=0, 
+                      beetle_dist=0,
+                      dist_start=0,
+                      correct_bias = 0,
+                      calculate_d13c = 0,
+                      canopy_cond=1,
+                      gpp_model=2, 
+                      maint_resp=2),
+      check_input = TRUE,
+      df_out = TRUE)
+```
+
+## Plot the plot standing volume
+```{r}
+ggplot(out %>% filter(variable=="volume"),aes(x=date,y=value,col=species)) + geom_line() + theme_light()
+```
+

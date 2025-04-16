@@ -1,0 +1,14 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+*.o
+*.so
+*.dll
+*.mod
+*.DS_Store
+dev/
+*.gz
+vignettes_build/r3PG-ReferenceManual.html
+issues
+inst/doc

@@ -1,0 +1,56 @@
+# C objects
+C_OBJS = skeleton.o
+
+# Fortran objects
+FT_OBJS =   allocation_module.o beetle_sub_module.o beetle_module.o bias_correction_module.o root.o gpp_sub_module.o gpp_module.o \
+			light_interception_module.o management_module.o md_decl_const.o mortality_module.o phenology_module.o wind_module.o \
+			soil_cnp_sub.o soil_cnp_module.o raut_module.o transpiration_module.o utils_module.o md_3PG.o  
+
+all:
+	@$(MAKE) $(SHLIB) 
+	@rm -rf *.mod *.o
+
+$(SHLIB): $(FT_OBJS) $(C_OBJS)
+
+# Dependency of objects (?)
+# <name.o>: <modulename.o>
+beetle_sub_module.o: md_decl_const.o
+beetle_module.o : beetle_sub_module.o
+gpp_module.o: gpp_sub_module.o
+bias_correction_module.o: md_decl_const.o utils_module.o
+gpp_sub_module.o: root.o
+gpp_module.o: gpp_sub_module.o
+light_interception_module.o: md_decl_const.o utils_module.o
+management_module.o: md_decl_const.o phenology_module.o utils_module.o
+soil_cnp_module.o: soil_cnp_sub.o
+raut_module.o: md_decl_const.o utils_module.o soil_cnp_sub.o 
+transpiration_module.o: md_decl_const.o
+utils_module.o: md_decl_const.o
+md_3PG.o: allocation_module.o beetle_module.o bias_correction_module.o gpp_module.o md_decl_const.o light_interception_module.o \
+			management_module.o mortality_module.o phenology_module.o wind_module.o soil_cnp_module.o  \
+			soil_cnp_sub.o raut_module.o transpiration_module.o utils_module.o
+
+# Source (object) of Fortran modules
+# <modulename.mod>: <filename.o>
+allocation.mod: allocation_module.o
+beetle_subroutines.mod: beetle_sub_module.o
+beetle_disturbance.mod: beetle_module.o
+bias_correction.mod: bias_correction_module.o
+root_module.mod: root.o
+gpp_subroutines.mod: gpp_sub_module.o
+gpp_calc.mod: gpp_module.o
+light_int.mod: light_interception_module.o
+management.mod: management_module.o
+mortality.mod: mortality_module.o
+phenology_module.mod: phenology.o
+ra_calc.mod: raut_module.o
+soil_cnp_subroutines.mod: soil_cnp_sub.o
+soil_cnp.mod: soil_cnp_module.o
+transpiration.mod: transpiration_module.o
+utils.mod: utils_module.o
+wind_disturbance.mod: wind_module.o
+mod_3PG.mod: md_3PG.o 
+
+# Dependency of the C wrapper
+skeleton.o: mod_3PG.mod
+
