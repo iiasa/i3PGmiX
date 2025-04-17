@@ -474,6 +474,3 @@ integer :: mortality_model                      ! 1 - 3PGpjs; 2 - Brandl; 3 - LP
 integer :: wind_dist                         	! 0 - no disturbance; 1 - activate disturbance
 integer :: beetle_dist                         	! 0 - no disturbance; 1 - activate disturbance
 integer :: d_sus_type                         	! 1 - LandClim; 2 - growth efficiency based
-integer :: peat_io                        	 	! 0 - no peatland; 1 - peatland inclusion
-integer :: anoxic_io                        	! 0 - no anoxic; 1 - anoxic condition inclusion
-integer :: dim_cslyr                        	! 0- no soil layer; 1:n: N number of Soil layers 
