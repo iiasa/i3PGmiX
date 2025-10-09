@@ -196,7 +196,7 @@ contains
 			! n = 1.8d0
 		! endif
 		
-		psi = -(((1.d0/ (asw/maxasw))**(n/(n-1)) - 1.d0)**(1.d0/n) / a) / 1000.d0
+		psi = -(((1.d0/ (asw/maxasw))**(n/(n-1)) - 1.d0)**(1.d0/n) / a) / 100.d0
 		
 		if (psi < -10.d0) then
 			psi = -10.d0
