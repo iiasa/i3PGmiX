@@ -168,20 +168,22 @@ contains
 		integer, intent(in) :: sc
 			
 		real(kind=8) :: psi, a, n
-		! Parameters from Schaap, M. G., & Van Genuchten, M. T. (2006). 
-			
+
+
+		! Updated parameters from https://www.nature.com/articles/s41597-022-01481-5/
+
 		if (sc .eq. int(1)) then
-			a = 0.02630268d0	
-			n = 2.233572223d0	
+			a = 2.66d0
+			n = 3.17d0
 		else if (sc .eq. int(2)) then
-			a = 0.040738028d0	
-			n = 1.191242008d0	
+			a = 1.88d0	
+			n = 1.71d0	
 		else if (sc .eq. int(3)) then
-			a = 0.012022644d0		
-			n = 1.377209469d0	
+			a = 3.1d0		
+			n = 1.43d0	
 		else
-			a = 0.011220185d0	
-			n = 1.300169578d0	
+			a = 5.36	
+			n = 1.59	
 		endif
 			
 		! Parameters from Lu, N., Godt, J. W., & Wu, D. T. (2010). 
@@ -196,7 +198,7 @@ contains
 			! n = 1.8d0
 		! endif
 		
-		psi = -(((1.d0/ (asw/maxasw))**(n/(n-1)) - 1.d0)**(1.d0/n) / a) / 100.d0
+		psi = -(((1.d0/ (asw/maxasw))**(n/(n-1)) - 1.d0)**(1.d0/n) / a) 
 		
 		if (psi < -10.d0) then
 			psi = -10.d0
